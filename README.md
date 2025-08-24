@@ -10,6 +10,8 @@ The implementation covered **AWS S3, IAM, and VPC fundamentals**.
 ## 🚀 Step 1: Hosting Static Website on S3
 1. I created a bucket named **`cloudlaunch-site-chisom-20250823`**.
    - Enabled **Static Website Hosting**.
+     ![Screenshot](screenshot/Image7.png)
+
    - Uploaded `index.html` (home page) and `error.html` (fallback page).
    - Granted public read access using a bucket policy.
    - Verified website access via the provided **S3 website endpoint**.
