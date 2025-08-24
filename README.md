@@ -48,17 +48,24 @@ This ensures **principle of least privilege**.
 
 ## 🌐 Step 3: Building the VPC
 1. Created a new VPC **`cloudlaunch-vpc`** with CIDR block `10.0.0.0/16`.
-2. Added **3 subnets**:
+3. Added **3 subnets**:
    - Public Subnet: `10.0.1.0/24`
    - Application Subnet: `10.0.2.0/24`
    - Database Subnet: `10.0.3.0/28`
-3. Created and attached an **Internet Gateway** (`cloudlaunch-igw`) to the VPC.
-4. Set up **Route Tables**:
+   -  ![Screenshot](screenshot/vpccreation.png)
+4. Created and attached an **Internet Gateway** (`cloudlaunch-igw`) to the VPC.
+    ![Screenshot](screenshot/Image16.png)
+6. Set up **Route Tables**:
    - Public route table routes `0.0.0.0/0` to the IGW.
+      ![Screenshot](screenshot/Image21.png)
    - Application and Database route tables are private (no internet access).
-5. Configured **Security Groups**:
+7. Configured **Security Groups**:
    - App SG: allows HTTP traffic within the VPC.
+      ![Screenshot](screenshot/Image22.png)
+      ![Screenshot](screenshot/Image23.png)
    - DB SG: allows MySQL (3306) traffic only from the App Subnet.
+      ![Screenshot](screenshot/Image24.png)
+      ![Screenshot](screenshot/Image25.png)
 
 ---
 
@@ -68,7 +75,7 @@ This ensures **principle of least privilege**.
   [Screenshot](screenshot/Image8.png)
 - Used the **IAM user credentials** to:
   - Upload and read files in the private bucket.
-    
+     ![Screenshot](screenshot/Image14.png)
   - List objects in the visible-only bucket.
 - Verified that the **VPC, subnets, and route tables** were properly created under **VPC → Your VPCs** in the AWS Console.
 
@@ -83,8 +90,8 @@ This ensures **principle of least privilege**.
 ---
 
 ## 🌍 Deliverables
-- **Website Bucket:** `cloudlaunch-site-bucket`
-- **Private Bucket:** `cloudlaunch-private-bucket`
-- **List-Only Bucket:** `cloudlaunch-visible-only-bucket`
+- **Website Bucket:** `cloudlaunch-site-chisom-20250823`
+- **Private Bucket:** `cloudlaunch-private-chisom-20250823`
+- **List-Only Bucket:** `cloudlaunch-visible-only-chisom-20250823`
 - **IAM User:** `cloudlaunch-user`
 - **VPC:** `cloudlaunch-vpc` with 3 subnets, 1 IGW, and 3 route tables
