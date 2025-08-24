@@ -13,8 +13,10 @@ The implementation covered **AWS S3, IAM, and VPC fundamentals**.
      ![Screenshot](screenshot/Image7.png)
    - Uploaded `index.html` (home page) and `error.html` (fallback page).
    - Granted public read access using a bucket policy.
+   - 
       ![Screenshot](screenshot/Image5.png)
    - Verified website access via the provided **S3 website endpoint**.
+   - 
        ![Screenshot](screenshot/Image13.png)
 
    ✅ Static website was confirmed working by visiting the URL and seeing `index.html`.
@@ -40,6 +42,7 @@ The implementation covered **AWS S3, IAM, and VPC fundamentals**.
   - Read & upload to the private bucket.
   - Only list in the visible-only bucket.
   - Read objects from the site bucket.
+    
 [Screenshot](screenshot/Image9.png)
 This ensures **principle of least privilege**.
 
