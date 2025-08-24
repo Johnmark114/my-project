@@ -18,7 +18,7 @@ The implementation covered **AWS S3, IAM, and VPC fundamentals**.
    - Granted public read access using a bucket policy.
       ![Screenshot](screenshot/Image5.png)
    - Verified website access via the provided **S3 website endpoint**.
-      ![Screenshot](screenshot/Image13.png)
+      ![Screenshot](screenshot/image13.png)
 
    ✅ Static website was confirmed working by visiting the URL and seeing `index.html`.
 
@@ -77,7 +77,7 @@ This ensures **principle of least privilege**.
   ![Screenshot](screenshot/Image8.png)
 - Used the **IAM user credentials** to:
   - Upload and read files in the private bucket.
-     ![Screenshot](screenshot/Image14.png)
+     ![Screenshot](screenshot/image14.png)
   - List objects in the visible-only bucket.
 - Verified that the **VPC, subnets, and route tables** were properly created under **VPC → Your VPCs** in the AWS Console.
 
