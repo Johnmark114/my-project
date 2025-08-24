@@ -11,10 +11,11 @@ The implementation covered **AWS S3, IAM, and VPC fundamentals**.
 1. I created a bucket named **`cloudlaunch-site-chisom-20250823`**.
    - Enabled **Static Website Hosting**.
      ![Screenshot](screenshot/Image7.png)
-
    - Uploaded `index.html` (home page) and `error.html` (fallback page).
    - Granted public read access using a bucket policy.
+      ![Screenshot](screenshot/Image5.png)
    - Verified website access via the provided **S3 website endpoint**.
+       ![Screenshot](screenshot/Image13.png)
 
    ✅ Static website was confirmed working by visiting the URL and seeing `index.html`.
 
@@ -22,10 +23,13 @@ The implementation covered **AWS S3, IAM, and VPC fundamentals**.
    - Not publicly accessible.
    - Only my IAM user could upload (`PutObject`) and read (`GetObject`) files.
    - Delete permission was **intentionally restricted**.
+      
 
 3. I also created **`cloudlaunch-visible-only-chisom-20250823`**.
    - Configured so my IAM user can only **list bucket contents**.
    - No read/write access to objects.
+
+     [Screenshot](screenshot/Image6.png)
 
 ---
 
@@ -36,8 +40,9 @@ The implementation covered **AWS S3, IAM, and VPC fundamentals**.
   - Read & upload to the private bucket.
   - Only list in the visible-only bucket.
   - Read objects from the site bucket.
-
+[Screenshot](screenshot/Image9.png)
 This ensures **principle of least privilege**.
+
 
 ---
 
@@ -60,8 +65,10 @@ This ensures **principle of least privilege**.
 ## ✅ How I Verified My Work
 - Opened the **S3 website URL** → confirmed that `index.html` loaded successfully.
 - Tested invalid URL → confirmed `error.html` showed.
+  [Screenshot](screenshot/Image8.png)
 - Used the **IAM user credentials** to:
   - Upload and read files in the private bucket.
+    
   - List objects in the visible-only bucket.
 - Verified that the **VPC, subnets, and route tables** were properly created under **VPC → Your VPCs** in the AWS Console.
 
