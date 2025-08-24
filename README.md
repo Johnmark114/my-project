@@ -54,7 +54,7 @@ This ensures **principle of least privilege**.
    - Public Subnet: `10.0.1.0/24`
    - Application Subnet: `10.0.2.0/24`
    - Database Subnet: `10.0.3.0/28`
-     ![Screenshot](screenshot/vpccreation.png)
+     ![Screenshot](screenshot/VPCCREATION.png)
 3. Created and attached an **Internet Gateway** (`cloudlaunch-igw`) to the VPC.
     ![Screenshot](screenshot/Image16.png)
 4. Set up **Route Tables**:
