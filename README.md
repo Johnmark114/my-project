@@ -14,6 +14,7 @@ The implementation covered **AWS S3, IAM, and VPC fundamentals**.
 1. I created a bucket named **`cloudlaunch-site-chisom-20250823`**.
    - Enabled **Static Website Hosting**.
      ![Screenshot](screenshot/Image7.png)
+  **S3 STATIC LINK**: [http://cloudlaunch-site-chisom-20250823.s3-website-us-east-1.amazonaws.com](http://cloudlaunch-site-chisom-20250823.s3-website-us-east-1.amazonaws.com)
    - Uploaded `index.html` (home page) and `error.html` (fallback page).
    - Granted public read access using a bucket policy.
       ![Screenshot](screenshot/Image5.png)
@@ -41,12 +42,86 @@ The implementation covered **AWS S3, IAM, and VPC fundamentals**.
   - Read & upload to the private bucket.
   - Only list in the visible-only bucket.
   - Read objects from the site bucket.
-    
+   **console URL**: [https://aws-johnmark-b8.signin.aws.amazon.com/console](https://aws-johnmark-b8.signin.aws.amazon.com/console)
 ![Screenshot](screenshot/Image9.png)
 
 This ensures **principle of least privilege**.
+**'```json
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Sid": "SeeBucketNamesInAccount",
+			"Effect": "Allow",
+			"Action": [
+				"s3:ListAllMyBuckets"
+			],
+			"Resource": "*"
+		},
+		{
+			"Sid": "ListAndReadSiteBucket",
+			"Effect": "Allow",
+			"Action": [
+				"s3:ListBucket"
+			],
+			"Resource": "arn:aws:s3:::cloudlaunch-site-chisom-20250823"
+		},
+		{
+			"Sid": "GetFromSiteBucket",
+			"Effect": "Allow",
+			"Action": [
+				"s3:GetObject"
+			],
+			"Resource": "arn:aws:s3:::cloudlaunch-site-chisom-20250823/*"
+		},
+		{
+			"Sid": "ListPrivateBucket",
+			"Effect": "Allow",
+			"Action": [
+				"s3:ListBucket"
+			],
+			"Resource": "arn:aws:s3:::cloudlaunch-private-chisom-20250823"
+		},
+		{
+			"Sid": "GetPutPrivateBucketObjects",
+			"Effect": "Allow",
+			"Action": [
+				"s3:GetObject",
+				"s3:PutObject"
+			],
+			"Resource": "arn:aws:s3:::cloudlaunch-private-chisom-20250823/*"
+		},
+		{
+			"Sid": "ExplicitNoDeleteAnywhere",
+			"Effect": "Deny",
+			"Action": [
+				"s3:DeleteObject",
+				"s3:DeleteObjectVersion"
+			],
+			"Resource": [
+				"arn:aws:s3:::cloudlaunch-site-chisom-20250823/*",
+				"arn:aws:s3:::cloudlaunch-private-chisom-20250823/*",
+				"arn:aws:s3:::cloudlaunch-visible-only-chisom-20250823/*"
+			]
+		},
+		{
+			"Sid": "DenyListingAndAccessVisibleOnlyBucket",
+			"Effect": "Deny",
+			"Action": [
+				"s3:ListBucket",
+				"s3:GetObject",
+				"s3:PutObject"
+			],
+			"Resource": [
+				"arn:aws:s3:::cloudlaunch-visible-only-chisom-20250823",
+				"arn:aws:s3:::cloudlaunch-visible-only-chisom-20250823/*"
+			]
+		}
+	]
+}
 
----
+
+---'**
 
 ## 🌐 Step 3: Building the VPC
 1. Created a new VPC **`cloudlaunch-vpc`** with CIDR block `10.0.0.0/16`.
