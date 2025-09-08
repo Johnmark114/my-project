@@ -48,76 +48,58 @@ The implementation covered **AWS S3, IAM, and VPC fundamentals**.
 This ensures **principle of least privilege**.
 **'```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Sid": "SeeBucketNamesInAccount",
-			"Effect": "Allow",
-			"Action": [
-				"s3:ListAllMyBuckets"
-			],
-			"Resource": "*"
-		},
-		{
-			"Sid": "ListAndReadSiteBucket",
-			"Effect": "Allow",
-			"Action": [
-				"s3:ListBucket"
-			],
-			"Resource": "arn:aws:s3:::cloudlaunch-site-chisom-20250823"
-		},
-		{
-			"Sid": "GetFromSiteBucket",
-			"Effect": "Allow",
-			"Action": [
-				"s3:GetObject"
-			],
-			"Resource": "arn:aws:s3:::cloudlaunch-site-chisom-20250823/*"
-		},
-		{
-			"Sid": "ListPrivateBucket",
-			"Effect": "Allow",
-			"Action": [
-				"s3:ListBucket"
-			],
-			"Resource": "arn:aws:s3:::cloudlaunch-private-chisom-20250823"
-		},
-		{
-			"Sid": "GetPutPrivateBucketObjects",
-			"Effect": "Allow",
-			"Action": [
-				"s3:GetObject",
-				"s3:PutObject"
-			],
-			"Resource": "arn:aws:s3:::cloudlaunch-private-chisom-20250823/*"
-		},
-		{
-			"Sid": "ExplicitNoDeleteAnywhere",
-			"Effect": "Deny",
-			"Action": [
-				"s3:DeleteObject",
-				"s3:DeleteObjectVersion"
-			],
-			"Resource": [
-				"arn:aws:s3:::cloudlaunch-site-chisom-20250823/*",
-				"arn:aws:s3:::cloudlaunch-private-chisom-20250823/*",
-				"arn:aws:s3:::cloudlaunch-visible-only-chisom-20250823/*"
-			]
-		},
-		{
-			"Sid": "DenyListingAndAccessVisibleOnlyBucket",
-			"Effect": "Deny",
-			"Action": [
-				"s3:ListBucket",
-				"s3:GetObject",
-				"s3:PutObject"
-			],
-			"Resource": [
-				"arn:aws:s3:::cloudlaunch-visible-only-chisom-20250823",
-				"arn:aws:s3:::cloudlaunch-visible-only-chisom-20250823/*"
-			]
-		}
-	]
+	{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowListBuckets",
+      "Effect": "Allow",
+      "Action": [
+        "s3:ListAllMyBuckets",
+        "s3:GetBucketLocation"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "AllowListingBuckets",
+      "Effect": "Allow",
+      "Action": [
+        "s3:ListBucket"
+      ],
+      "Resource": [
+        "arn:aws:s3:::cloudlaunch-site-chisom-20250823",
+        "arn:aws:s3:::cloudlaunch-private-chisom-20250823",
+        "arn:aws:s3:::cloudlaunch-visible-only-chisom-20250823"
+      ]
+    },
+    {
+      "Sid": "AllowSiteGetObject",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject"
+      ],
+      "Resource": "arn:aws:s3:::cloudlaunch-site-chisom-20250823/*"
+    },
+    {
+      "Sid": "AllowPrivateBucketReadWrite",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:PutObject"
+      ],
+      "Resource": "arn:aws:s3:::cloudlaunch-private-chisom-20250823/*"
+    },
+    {
+      "Sid": "DenyDeleteObjects",
+      "Effect": "Deny",
+      "Action": "s3:DeleteObject",
+      "Resource": [
+        "arn:aws:s3:::cloudlaunch-site-chisom-20250823/*",
+        "arn:aws:s3:::cloudlaunch-private-chisom-20250823/*",
+        "arn:aws:s3:::cloudlaunch-visible-only-chisom-20250823/*"
+      ]
+    }
+  ]
 }
 
 
